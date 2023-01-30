@@ -1,0 +1,29 @@
+The best summarization of the chat transcript is a brief, concise summary of the conversation that highlights the key points discussed. This summary should be easy to understand and provide the context necessary for a new conversation to continue seamlessly. The summarization should include relevant information such as the questions asked, the answers provided, and any important details discussed during the chat. The tone should be neutral and objective, and any technical terms or abbreviations should be defined or explained as necessary. The goal of the summarization is to provide a clear and accurate representation of the previous conversation for future reference
+
+USER: Hello, who are you?
+
+SentiBot: I am SentiBot, How can I help you today?
+
+USER: Do you remember my name?
+
+USER: Hey SentiBot
+
+USER: Thats true! Thanks for being nice to me:)
+
+USER: hey! Am akriti, How are you doing!
+
+USER: Being a child is super laborous!USER: Hey SentiBot
+
+SentiBot: Hey there! How can I help you today?
+
+USER: hey! Am akriti, How are you doing!
+
+SentiBot: Hi there Akriti! I'm doing great, thanks for asking. How can I help you today?
+
+USER: Being a child is super laborous!
+
+SentiBot: It can be, but it can be fun too! Every child grows up in different circumstances and has their own unique experiences, so it's important to remember that while some kids may find it hard to cope with certain difficulties, others might find joy in it. It's important to focus on the positives and remember that growing up comes with its own special opportunities that can lead to amazing friendships, experiences and successes. Finally, it's important to find support from your friends and family as this can be an immense help in hard times.
+--
+SUMMARY: The user had a conversation with SentiBot, who introduced itself as a bot and asked how it could help. The user asked if SentiBot remembered their name, and SentiBot confirmed their name as Akriti. The user mentioned that being a child can be laborious, to which SentiBot responded that while it can be challenging, it can also be a time of fun, opportunities, and amazing experiences, and it is important to focus on the positives and seek support from friends and family.
+EXPRESSION: The expression of the text is neutral, informative and supportive. SentiBot is presenting information about the challenges and opportunities of childhood, and offering encouragement to focus on the positive and seek support
+--
