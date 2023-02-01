@@ -14,7 +14,7 @@ import uvicorn
 app = FastAPI()
 logger.debug('Application started.')
 
-
+#model
 class Message(BaseModel):
   value: str
   chatroom_id: str = None
