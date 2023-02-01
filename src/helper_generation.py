@@ -1,7 +1,9 @@
 import cohere
 import helper_cohere
 from loguru import logger
-
+import re
+from time import time,sleep
+import os
 
 import warnings
 
@@ -11,14 +13,14 @@ warnings.filterwarnings("ignore")
 class CohereGeneration:
     def __init__(self):
         self.model = 'command-xlarge-nightly'
-        self.max_tokens = 2000
+        self.max_tokens = 500
         self.temperature = 0.9
         self.k = 0
         self.p = 0.7 
-        self.frequency_penalty = 0.04,
-        self.presence_penalty = 0,
-        self.stop_sequences = ["USER:"],
-        self.return_likelihoods = 'NONE',
+        self.frequency_penalty = 0.04
+        self.presence_penalty = 0.0
+        self.stop_sequences = ["USER:"]
+        self.return_likelihoods = 'NONE'
         self.num_generations = 1
         self.co = helper_cohere.CohereClient().co
     
@@ -31,7 +33,8 @@ class CohereGeneration:
         logger.debug(f'Cohere client: {self.co}')
         max_retry = 5
         retry = 0
-        prompt = self.open_file('../prompt_senti.txt').replace('<<CONVERSATION>>',block)
+        file_path = os.path.join(os.path.dirname(__file__), 'prompts', 'prompt_senti.txt')
+        prompt = self.open_file(file_path).replace('<<CONVERSATION>>',block)
         prompt = prompt.encode(encoding='ASCII',errors='ignore').decode()
         logger.debug(f'Incoming prompt for cohere: {prompt}')
         while True:
@@ -47,10 +50,13 @@ class CohereGeneration:
                     presence_penalty=self.presence_penalty,
                     stop_sequences=self.stop_sequences,
                     return_likelihoods=self.return_likelihoods,
-                    num_generations=self.num_generations)
+                    num_generations=self.num_generations
+                )
                 logger.debug(f'The response from cohere is \n: {response}')
                 text = response.generations[0].text.strip()
                 text = re.sub('\s+',' ',text)
+                text = 'SentiBot:' + ' ' + text
+                logger.debug(f'The reply message from cohere is: {text}')
                 return text 
 
             except Exception as oops:

@@ -1,0 +1,11 @@
+cohere==3.2.3
+fastapi==0.89.1
+loguru==0.6.0
+numpy==1.24.1
+openai==0.26.4
+pandas==1.5.3
+pydantic==1.10.4
+pymongo==4.3.3
+python-dotenv==0.21.1
+torch==1.13.1
+uvicorn==0.20.0
