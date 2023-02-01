@@ -1,0 +1,24 @@
+[tool.poetry]
+name = "repl_nix_SentiBot"
+version = "0.1.0"
+description = ""
+authors = ["Replit user <<>>"]
+
+[tool.poetry.dependencies]
+python = "^3.10"
+openai = "^0.26.4"
+numpy = "^1.24.1"
+pydantic = "^1.10.4"
+fastapi = "^0.89.1"
+pymongo = "^4.3.3"
+python-dotenv = "^0.21.1"
+torch = "^1.13.1"
+loguru = "^0.6.0"
+pandas = "^1.5.3"
+uvicorn = "^0.20.0"
+
+[tool.poetry.dev-dependencies]
+
+[build-system]
+requires = ["poetry-core>=1.0.0"]
+build-backend = "poetry.core.masonry.api"

@@ -54,7 +54,8 @@ class NLPClient:
 
     
     def get_completion(self,block):
-        prompt = self.open_file('../prompt_senti.txt').replace('<<CONVERSATION>>',block)
+        file_path = os.path.join(os.path.dirname(__file__), 'prompts', 'prompt_senti.txt')
+        prompt = self.open_file(file_path).replace('<<CONVERSATION>>',block)
         logger.debug(f'The final prompt! \n {prompt}')
         response = self.gpt3_completion(prompt)
         logger.debug(f'The final response from bot: {response}')
