@@ -55,7 +55,6 @@ class CohereGeneration:
                 logger.debug(f'The response from cohere is \n: {response}')
                 text = response.generations[0].text.strip()
                 text = re.sub('\s+',' ',text)
-                text = 'SentiBot:' + ' ' + text
                 logger.debug(f'The reply message from cohere is: {text}')
                 return text 
 

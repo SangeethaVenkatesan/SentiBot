@@ -14,10 +14,6 @@ import warnings
 
 warnings.filterwarnings("ignore")
 
-
-
-
-
 load_dotenv()
 
 
@@ -25,9 +21,6 @@ class CohereClient:
     def __init__(self):
         self.co = self.get_cohere_client()
         
-        
-
-    
     def get_cohere_client(self):
         COHERE_API_KEY = os.environ.get('COHERE_API_KEY')
         co = cohere.Client(COHERE_API_KEY)
