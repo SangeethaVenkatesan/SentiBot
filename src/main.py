@@ -14,7 +14,7 @@ import uvicorn
 app = FastAPI()
 logger.debug('Application started.')
 
-#model
+#models
 class Message(BaseModel):
   value: str
   chatroom_id: str = None
@@ -23,12 +23,28 @@ class Message(BaseModel):
   def __getitem__(self, item):
     return getattr(self, item)
 
+class UserId(BaseModel):
+  user_id: str
+
+  def __getitem__(self, item):
+    return getattr(self, item)
 
 @app.get("/")
 async def health_check():
   # logger.debug("Health check hit")
   return {'statusCode': 200, 'body': json.dumps('Healthy')}
 
+@app.get("/get_chatroom_ids")
+async def get_chat_room_ids(userId: UserId, request: Request):
+  user_id = userId["user_id"]
+  client_db = helper_database.SociBotDB()
+  try:
+    chatroom_ids = client_db.get_chat_room_ids(user_id)
+  except Exception as e:
+    return {'statusCode': 500, 'body': str(e)}
+  if chatroom_ids is None:
+    return {'statusCode': 404, 'body': 'User not found'}
+  return {'statusCode': 200, 'body': chatroom_ids }
 
 @app.post("/chat")
 def get_response(message: Message, request: Request):

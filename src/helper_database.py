@@ -14,6 +14,7 @@ class SociBotDB:
 
   def __init__(self):
     self.dbClient = self.get_db_client()
+    logger.debug(f'{self.dbClient}')
     self.user_collection = self.get_user_collection()
     self.chat_room_collection = self.get_chat_room_collection()
 
@@ -25,7 +26,7 @@ class SociBotDB:
     #   f"mongodb+srv://SentiTestBot:{db_password}@cluster0.hyswuko.mongodb.net/?retryWrites=true&w=majority"
     # )
 
-    db = client['SentiTestBot']
+    db = client['socibot']
     return db
     logger.debug(db)
 
@@ -43,6 +44,13 @@ class SociBotDB:
     conversations = result['conversations']
     final_conversations = [i['message'] for i in conversations]
     return final_conversations
+
+  def get_chat_room_ids(self, user_id):
+    result = self.user_collection.find_one({"_id": user_id})
+    logger.debug(f'Existing chatrooms of user: {user_id}')
+    chatroom_ids = result['chatroom_ids']
+    logger.debug(f'List of chatroom ids: {chatroom_ids}')
+    return chatroom_ids
 
   def update_response_chatroom(self, response, chatroom_id):
     result = self.chat_room_collection.find_one({"_id": chatroom_id})
