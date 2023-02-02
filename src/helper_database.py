@@ -8,7 +8,7 @@ import datetime
 load_dotenv()
 
 db_password = os.environ['DB_PASSWORD']
-
+# db_password = os.environ['TESTDB_PASSWORD']
 
 class SociBotDB:
 
@@ -27,6 +27,7 @@ class SociBotDB:
     # )
 
     db = client['socibot']
+    # db = client['SentiTestBot']
     return db
     logger.debug(db)
 
@@ -51,6 +52,13 @@ class SociBotDB:
     chatroom_ids = result['chatroom_ids']
     logger.debug(f'List of chatroom ids: {chatroom_ids}')
     return chatroom_ids
+
+  def delete_chat_room_id(self, user_id, chatroom_id):
+    logger.debug(f'Updating chatrooms of user: {user_id}')
+    self.user_collection.update_one({"_id": user_id}, {"$pull": {"chatroom_ids": chatroom_id}})
+    logger.debug(f'Deleting {chatroom_id} in chatrooms collection.')
+    self.chat_room_collection.delete_one({"_id": chatroom_id})
+    logger.debug('Chatroom deleted!')
 
   def update_response_chatroom(self, response, chatroom_id):
     result = self.chat_room_collection.find_one({"_id": chatroom_id})

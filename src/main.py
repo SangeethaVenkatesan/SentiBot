@@ -29,6 +29,13 @@ class UserId(BaseModel):
   def __getitem__(self, item):
     return getattr(self, item)
 
+class ChatroomId(BaseModel):
+  chatroom_id: str
+  user_id: str
+
+  def __getitem__(self, item):
+    return getattr(self, item)
+
 @app.get("/")
 async def health_check():
   # logger.debug("Health check hit")
@@ -94,5 +101,16 @@ def get_response(message: Message, request: Request):
     }
   return {'statusCode': 200, 'body': body}
 
-
+@app.delete("/delete_chatroom")
+async def delete_chatroom(chatroom: ChatroomId, request: Request):
+  user_id = chatroom["user_id"]
+  chatroom_id = chatroom["chatroom_id"]
+  client_db = helper_database.SociBotDB()
+  try:
+    client_db.delete_chat_room_id(user_id, chatroom_id)
+    return {"statusCode": 200, "message": "Chatroom deleted successfully"}
+  except Exception as e:
+    logger.error(f'Error while deleting chatroom: {e}')
+    return {'statusCode': 500, 'body': 'Error while deleting chatroom'}
+  
 uvicorn.run(app, host="0.0.0.0", port=8080)
